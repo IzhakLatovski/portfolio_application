@@ -14,10 +14,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
-                sh 'docker build -t portfolio-flask-image .'
-                script {
-                    dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":$BUILD_NUMBER"
-                }
+                // sh 'docker build -t portfolio-flask-image .'
+                // script {
+                //     dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":$BUILD_NUMBER"
+                // }
                 echo '=========================================== 2. END ==========================================='
             }
         }
@@ -38,20 +38,20 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '=========================================== 4. Deploying image to ECR ==========================================='
-                script{
-                    docker.withRegistry("https://" + "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio", "ecr:eu-west-2:" + "portfoliocredentials") {
-                        dockerImage.push()
-                    }
-                }
+                // script{
+                //     docker.withRegistry("https://" + "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio", "ecr:eu-west-2:" + "portfoliocredentials") {
+                //         dockerImage.push()
+                //     }
+                // }
                 echo '=========================================== 4. END ==========================================='
             }
         }
 
     }
 
-    post {
-        always {
-            sh 'docker-compose down'
-        }
-    }
+    // post {
+    //     always {
+    //         sh 'docker-compose down'
+    //     }
+    // }
 }
