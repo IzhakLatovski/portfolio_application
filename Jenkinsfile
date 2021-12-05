@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo '=========================================== 3. Testing ==========================================='
                 sh """
-                    docker-compose up --build -d
+                    docker-compose up -d --build
                     sleep 10
                     docker-compose down
                 """
