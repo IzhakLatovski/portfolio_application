@@ -15,8 +15,7 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
                 script {
-                    // docker build -t portfolio-app-image:"$BUILD_NUMBER" .
-                    echo "dfgdfgfdgfdgdfgdfgdfgfdgfdgfdgfdg"
+                    docker build -t portfolio-app-image:"$BUILD_NUMBER" .
                 } 
                 // script {
                 //     dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":$BUILD_NUMBER"
@@ -28,6 +27,10 @@ pipeline {
         stage('Test') {
             steps {
                 echo '=========================================== 3. Testing ==========================================='
+                // script {
+                //     docker-compose up --build -d
+
+                // }
                 // sh 'docker-compose up --build -d'
                 // sh 'sleep 20'
                 // sh 'curl myip:port'
