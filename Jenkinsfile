@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
                 script {
-                    docker build -t portfolio-app-image:"$BUILD_NUMBER" .
+                    docker build -t portfolio-app-image:"${BUILD_NUMBER}" .
                 } 
                 // script {
                 //     dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":$BUILD_NUMBER"
