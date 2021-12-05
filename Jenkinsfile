@@ -30,7 +30,7 @@ pipeline {
                 sh """
                     docker-compose up -d --build
                     echo "start of check !!!"
-                    until [ "`docker inspect -f {{.State.Running}} CONTAINERNAME`"=="true" ]; do
+                    until [ "`docker inspect -f {{.State.Running}} nginx`"=="true" ]; do
                     sleep 0.1;
                     done;
                     echo "end of check !!!"
