@@ -7,7 +7,7 @@ services:
     networks:
       - front
       - back
-    links:
+    links: #waits for DB before creating the application
       - mongo
 
   mongo:
@@ -33,7 +33,7 @@ services:
     networks:
       - front
     links:
-      - flask
+      - flask #waits for application before creating the Nginx
 
 volumes:
   mongo-data:
