@@ -27,10 +27,11 @@ pipeline {
         stage('Test') {
             steps {
                 echo '=========================================== 3. Testing ==========================================='
-                // sh """
-                //     docker-compose up --build -d
-
-                // """
+                sh """
+                    docker-compose up --build -d
+                    sleep 10
+                    docker-compose down
+                """
                 // sh 'docker-compose up --build -d'
                 // sh 'sleep 20'
                 // sh 'curl myip:port'
