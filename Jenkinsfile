@@ -29,11 +29,9 @@ pipeline {
                 echo '=========================================== 3. Testing ==========================================='
                 sh """
                     docker-compose up -d --build
-                    echo "start of check !!!"
                     until [ "`docker inspect -f {{.State.Running}} nginx`"=="true" ]; do
                     sleep 0.1;
                     done;
-                    echo "end of check !!!"
                     docker-compose down
                 """
                 echo '=========================================== 3. END ==============================================='
