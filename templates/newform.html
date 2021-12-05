@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New skill</title>
+
+    <style>
+        * {
+            text-align: center;
+            font-family: sans-serif;
+        }
+        body {
+            background-color: #8ecae6;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+        }
+        .skill {
+            background-color: #a8dadc;
+            opacity: 80%;
+            border-radius: 5px;
+            border: 2px solid #219ebc;
+            padding: 1rem;
+            margin: 1rem auto;
+            width: 30%;
+        }
+        .skill img {
+            width: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>New skill<h1>
+    
+    <form method="post" action="/">
+        <input type="submit" value="Add" name="Add" />
+        <input type="text" name="name" placeholder="Skill name">
+        <input type="text" name="category" placeholder="Category">
+        <input type="text" name="date" placeholder="Date aquired">
+        <input type="text" name="description" placeholder="Description">
+        <input type="text" name="icon" placeholder="Icon URL">
+    </form>
+
+    <form method="get" action="/">
+        <input type="submit" value="Back to main page" name="Back"/>
+    </form>
+
+</body>
+</html>
