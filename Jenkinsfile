@@ -29,13 +29,13 @@ pipeline {
                 echo '=========================================== 3. Testing ==========================================='
                 sh """
                     docker-compose up -d --build
-                    sleep 10
+                    echo "start of check !!!"
+                    until [ "`docker inspect -f {{.State.Running}} CONTAINERNAME`"=="true" ]; do
+                    sleep 0.1;
+                    done;
+                    echo "end of check !!!"
                     docker-compose down
                 """
-                // sh 'docker-compose up --build -d'
-                // sh 'sleep 20'
-                // sh 'curl myip:port'
-                // sh 'docker-compose down'
                 echo '=========================================== 3. END ==============================================='
             }
         }
