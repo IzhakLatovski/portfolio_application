@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        branch = "${BRANCH_NAME}"
+        branch = "${BUILD_NUMBER}"
     }
 
     agent any
