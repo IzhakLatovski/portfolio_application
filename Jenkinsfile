@@ -60,8 +60,7 @@ pipeline {
                 echo '=========================================== 4. Deploying image to ECR ==========================================='
                 script{
                     docker.withRegistry("https://" + "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio", "ecr:eu-west-2:" + "portfoliocredentials") {
-                        // dockerImage.push()
-                        docker push 046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio:aaabbb
+                        dockerImage.push()
                     }
                 }
                 echo '=========================================== 4. END =============================================================='
