@@ -27,6 +27,7 @@ pipeline {
 
         stage('Pull') {
             steps {
+                echo branch
                 echo '=========================================== 1. Pulling latest repo ==========================================='
                 sh 'rm -r *'
                 checkout scm
