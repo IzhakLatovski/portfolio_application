@@ -1,4 +1,8 @@
 pipeline {
+    environment {
+        branch = "${BRANCH_NAME}"
+    }
+
     agent any
 
     stages {
@@ -8,7 +12,7 @@ pipeline {
                 sh 'rm -r *'
                 checkout scm
                 echo '=========================================== 1. END ==========================================================='
-                echo "${BRANCH_NAME}"
+                echo branch
             }
         }
         
