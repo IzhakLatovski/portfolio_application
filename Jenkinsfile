@@ -15,9 +15,9 @@ pipeline {
         }
 
         stage('not-main') {
-            when {expression {branch == 'feature/branching'}}
+            when {expression {branch == 'feature/*'}}
             steps {
-                echo "000000000000000000000000000000000000000000000000000000000"
+                echo "123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123"
             }
         }
 
