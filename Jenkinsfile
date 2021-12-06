@@ -14,12 +14,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
-                sh """
-                    docker build -t portfolio-app-image:"$BUILD_NUMBER" .
-                """
-                // script {
-                //     dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":$BUILD_NUMBER"
-                // }
+                // sh """
+                //     docker build -t portfolio-app-image:"$BUILD_NUMBER" .
+                // """
+                script {
+                    dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + "portfolio-app-image:$BUILD_NUMBER"
+                }
                 echo '=========================================== 2. END ============================================================='
             }
         }
@@ -32,6 +32,7 @@ pipeline {
                     until [ "`docker inspect -f {{.State.Running}} nginx`"=="true" ]; do
                     sleep 0.1;
                     done;
+                    echo '-== Application is up and ready. ==-'
                     docker-compose down
                 """
                 echo '=========================================== 3. END ==============================================='
