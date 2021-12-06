@@ -1,18 +1,33 @@
 pipeline {
     environment {
-        branch = "${BRANCH_NAME}"
+        branch = "${GIT_BRANCH}"
     }
 
     agent any
 
     stages {
+        stage('main') {
+            when {branch 'origin/main'}
+            steps {
+                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            }
+        }
+
+        stage('not-main') {
+            when {branch 'origin/feature/*'}
+            steps {
+                echo "000000000000000000000000000000000000000000000000000000000"
+            }
+        }
+
+
+
         stage('Pull') {
             steps {
                 echo '=========================================== 1. Pulling latest repo ==========================================='
                 sh 'rm -r *'
                 checkout scm
                 echo '=========================================== 1. END ==========================================================='
-                sh 'printenv'
             }
         }
         
