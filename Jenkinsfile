@@ -6,20 +6,19 @@ pipeline {
     agent any
 
     stages {
-        stage('main') {
-            when {expression { branch == "main" }}
-            steps {
-                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-            }
-        }
+        // stage('main') {
+        //     when {expression { branch == "main" }}
+        //     steps {
+        //         echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        //     }
+        // }
 
-        stage('not-main') {
-            when { branch "feature/*" }
-            steps {
-                echo "123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123"
-            }
-        }
+        // stage('not-main') {
+        //     when { branch "feature/*" }
+        //     steps {
+        //         echo "123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123"
+        //     }
+        // }
 
         stage('Pull') {
             steps {
@@ -61,7 +60,8 @@ pipeline {
                 echo '=========================================== 4. Deploying image to ECR ==========================================='
                 script{
                     docker.withRegistry("https://" + "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio", "ecr:eu-west-2:" + "portfoliocredentials") {
-                        dockerImage.push()
+                        // dockerImage.push()
+                        docker push 046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio:\aaabbb
                     }
                 }
                 echo '=========================================== 4. END =============================================================='
