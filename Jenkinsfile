@@ -6,19 +6,20 @@ pipeline {
     agent any
 
     stages {
-        // stage('main') {
-        //     when {expression { branch == "origin/main" }}
-        //     steps {
-        //         echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!123"
-        //     }
-        // }
+        stage('main') {
+            when {expression { branch == "origin/main" }}
+            steps {
+                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            }
+        }
 
-        // stage('not-main') {
-        //     when {branch 'origin/feature/*'}
-        //     steps {
-        //         echo "000000000000000000000000000000000000000000000000000000000"
-        //     }
-        // }
+        stage('not-main') {
+            when {branch 'origin/feature/*'}
+            steps {
+                echo "000000000000000000000000000000000000000000000000000000000"
+            }
+        }
 
         stage('Pull') {
             steps {
