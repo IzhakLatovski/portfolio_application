@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        branch = env.BRANCH_NAME
+        branch = "${BRANCH_NAME}"
     }
 
     agent any
@@ -12,7 +12,7 @@ pipeline {
                 sh 'rm -r *'
                 checkout scm
                 echo '=========================================== 1. END ==========================================================='
-                echo branch
+                sh 'printenv'
             }
         }
         
