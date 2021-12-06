@@ -7,7 +7,7 @@ pipeline {
 
     stages {
         stage('main') {
-            when {expression { branch == "origin/main" }}
+            when {expression { branch == "main" }}
             steps {
                 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
                 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -16,7 +16,7 @@ pipeline {
         }
 
         stage('not-main') {
-            when {expression { branch == "origin/feature/*" }}
+            when {expression { branch == "feature/*" }}
             steps {
                 echo "000000000000000000000000000000000000000000000000000000000"
                 echo "000000000000000000000000000000000000000000000000000000000"
