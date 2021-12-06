@@ -18,7 +18,8 @@ pipeline {
                 //     docker build -t portfolio-app-image:"$BUILD_NUMBER" .
                 // """
                 script {
-                    dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + "portfolio-app-image:$BUILD_NUMBER"
+                    // dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + "portfolio-app-image:$BUILD_NUMBER"
+                    dockerImage = docker.build "portfolio-app-image:$BUILD_NUMBER"
                 }
                 echo '=========================================== 2. END ============================================================='
             }
@@ -32,7 +33,7 @@ pipeline {
                     until [ "`docker inspect -f {{.State.Running}} nginx`"=="true" ]; do
                     sleep 0.1;
                     done;
-                    echo '-== Application is up and ready. ==-'
+                    echo '============== Application is up and ready =============='
                     docker-compose down
                 """
                 echo '=========================================== 3. END ==============================================='
