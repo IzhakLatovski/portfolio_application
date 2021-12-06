@@ -8,17 +8,14 @@ pipeline {
                 sh 'rm -r *'
                 checkout scm
                 echo '=========================================== 1. END ==========================================================='
+                echo "$BRANCH_NAME"
             }
         }
         
         stage('Build') {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
-                // sh """
-                //     docker build -t portfolio-app-image:"$BUILD_NUMBER" .
-                // """
                 script {
-                    // dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + "portfolio-app-image:$BUILD_NUMBER"
                     dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":$BUILD_NUMBER"
                 }
                 echo '=========================================== 2. END ============================================================='
@@ -53,12 +50,5 @@ pipeline {
                 echo '=========================================== 4. END =============================================================='
             }
         }
-
     }
-
-    // post {
-    //     always {
-    //         sh 'docker-compose down'
-    //     }
-    // }
 }
