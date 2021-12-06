@@ -6,21 +6,19 @@ pipeline {
     agent any
 
     stages {
-        stage('main') {
-            when {expression { branch == "origin/main" }}
-            steps {
-                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!123"
-            }
-        }
+        // stage('main') {
+        //     when {expression { branch == "origin/main" }}
+        //     steps {
+        //         echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!123"
+        //     }
+        // }
 
-        stage('not-main') {
-            when {branch 'origin/feature/*'}
-            steps {
-                echo "000000000000000000000000000000000000000000000000000000000"
-            }
-        }
-
-
+        // stage('not-main') {
+        //     when {branch 'origin/feature/*'}
+        //     steps {
+        //         echo "000000000000000000000000000000000000000000000000000000000"
+        //     }
+        // }
 
         stage('Pull') {
             steps {
@@ -36,7 +34,7 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
                 script {
-                    dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":$BUILD_NUMBER"
+                    dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":release-$BUILD_NUMBER"
                 }
                 echo '=========================================== 2. END ============================================================='
             }
@@ -56,8 +54,6 @@ pipeline {
                 echo '=========================================== 3. END ==============================================='
             }
         }
-
-        // Tag the dockerImage
 
         stage('Deploy') {
             steps {
