@@ -9,21 +9,17 @@ pipeline {
         stage('main') {
             when {expression { branch == "main" }}
             steps {
-                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
+                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
             }
         }
 
         stage('not-main') {
-            when {expression { branch == "feature/branching" }}
+            when {expression {branch == 'feature/branching'}}
             steps {
-                echo "000000000000000000000000000000000000000000000000000000000"
                 echo "000000000000000000000000000000000000000000000000000000000"
             }
         }
-
-
 
         stage('Pull') {
             steps {
@@ -39,7 +35,7 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
                 script {
-                    dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":$BUILD_NUMBER"
+                    dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":release-$BUILD_NUMBER"
                 }
                 echo '=========================================== 2. END ============================================================='
             }
@@ -60,16 +56,14 @@ pipeline {
             }
         }
 
-        // Tag the dockerImage
-
         stage('Deploy') {
             steps {
                 echo '=========================================== 4. Deploying image to ECR ==========================================='
-                // script{
-                //     docker.withRegistry("https://" + "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio", "ecr:eu-west-2:" + "portfoliocredentials") {
-                //         dockerImage.push()
-                //     }
-                // }
+                script{
+                    docker.withRegistry("https://" + "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio", "ecr:eu-west-2:" + "portfoliocredentials") {
+                        dockerImage.push()
+                    }
+                }
                 echo '=========================================== 4. END =============================================================='
             }
         }
