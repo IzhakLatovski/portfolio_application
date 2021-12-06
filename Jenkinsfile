@@ -7,7 +7,7 @@ pipeline {
 
     stages {
         stage('main') {
-            when {branch 'origin/main'}
+            when {branch 'main'}
             steps {
                 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
             }
