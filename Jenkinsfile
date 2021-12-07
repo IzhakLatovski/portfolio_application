@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
                 script {
-                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":release-$BUILD_NUMBER"
+                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":small-$BUILD_NUMBER"
                 }
                 echo '=========================================== 2. END ============================================================='
             }
