@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ==========================================='
                 script {
-                    dockerImage = docker.build "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio" + ":release-$BUILD_NUMBER"
+                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":release-$BUILD_NUMBER"
                 }
                 echo '=========================================== 2. END ============================================================='
             }
@@ -59,7 +59,7 @@ pipeline {
             steps {
                 echo '=========================================== 4. Deploying image to ECR ==========================================='
                 script{
-                    docker.withRegistry("https://" + "046432083464.dkr.ecr.eu-west-2.amazonaws.com/portfolio", "ecr:eu-west-2:" + "portfoliocredentials") {
+                    docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
                         dockerImage.push()
                     }
                 }
