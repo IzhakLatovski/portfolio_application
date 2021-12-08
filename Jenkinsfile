@@ -34,12 +34,7 @@ pipeline {
                 echo '=========================================== 2. GIT ==========================================='
                 sh """
                 echo 123 > test.txt
-
-                git config --global user.email "you@example.com"
-                git config --global user.name "Izhak"
                 
-                git remote add origin https://IzhakLatovski:Izhak048!@github.com/IzhakLatovski/portfolio_infrastructure.git
-
                 git add .
                 git commit -m "Test commit"
                 git push origin HEAD
