@@ -40,7 +40,7 @@ pipeline {
                 
                 git add .
                 git commit -m "Test commit"
-                git push -u origin main
+                git push -u origin HEAD
                 """
                 echo '=========================================== 2. END ==========================================================='
             }
