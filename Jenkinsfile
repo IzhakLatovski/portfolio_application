@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ====================================================='
                 script {
-                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_app_$BUILD_NUMBER"
+                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":latest"
                 }
                 echo '=========================================== 2. END ======================================================================='
             }
@@ -30,7 +30,7 @@ pipeline {
         //     steps {
         //         echo '=========================================== 3. Tagging image on main branch =============================================='
         //         script{
-        //             docker tag tasksapp:"$BUILD_NUMBER" 333923656856.dkr.ecr.eu-central-1.amazonaws.com/tasksapp:\$TAG
+        //             
         //         }
         //         echo '=========================================== 3. END ======================================================================='
         //     }
@@ -41,9 +41,7 @@ pipeline {
         //     steps {
         //         echo '=========================================== 3. Tagging image on feature branch ==========================================='
         //         script{
-        //             docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
-        //                 dockerImage.push()
-        //             }
+        //             
         //         }
         //         echo '=========================================== 3. END ======================================================================='
         //     }
