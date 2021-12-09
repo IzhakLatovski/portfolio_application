@@ -25,16 +25,16 @@ pipeline {
             }
         }
 
-        stage('Tag-main') {
-            when {expression { branch == "main" }}
-            steps {
-                echo '=========================================== 3. Tagging image on main branch =============================================='
-                script {
-                    docker tag dockerImage 006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:latest_izhak
-                }
-                echo '=========================================== 3. END ======================================================================='
-            }
-        }
+        // stage('Tag-main') {
+        //     when {expression { branch == "main" }}
+        //     steps {
+        //         echo '=========================================== 3. Tagging image on main branch =============================================='
+        //         script {
+        //             docker tag dockerImage 006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:latest_izhak
+        //         }
+        //         echo '=========================================== 3. END ======================================================================='
+        //     }
+        // }
 
         // stage('Tag-feature') {
         //     when { branch "feature/*" }
