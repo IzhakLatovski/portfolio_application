@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ====================================================='
                 sh """
-                    docker build -t portfolio_app:$BUILD_NUMBER
+                    docker build -t portfolio_app:$BUILD_NUMBER .
                 """
                 echo '=========================================== 2. END ======================================================================='
             }
