@@ -18,9 +18,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo '=========================================== 2. Building docker image ====================================================='
-                sh """
-                    docker build -t portfolio_app:$BUILD_NUMBER .
-                """
+                script {
+                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":$BUILD_NUMBER"
+                }
                 echo '=========================================== 2. END ======================================================================='
             }
         }
@@ -49,30 +49,32 @@ pipeline {
         //     }
         // }
 
-        // stage('Test') {
-        //     steps {
-        //         echo '=========================================== 4. Testing ==================================================================='
-        //         sh """
-        //             docker-compose up -d --build
-        //             until [ "`docker inspect -f {{.State.Running}} nginx`"=="true" ]; do
-        //             sleep 0.1;
-        //             done;
-        //             echo '============== Application is up and ready =============='
-        //             docker-compose down
-        //         """
-        //         echo '=========================================== 4. END ======================================================================='
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo '=========================================== 4. Testing ==================================================================='
+                sh """
+                    docker-compose up -d --build
+                    until [ "`docker inspect -f {{.State.Running}} nginx`"=="true" ]; do
+                    sleep 0.1;
+                    done;
+                    echo '============== Application is up and ready =============='
+                    docker-compose down
+                """
+                echo '=========================================== 4. END ======================================================================='
+            }
+        }
 
-        // stage('Deploy') {
-        //     when {expression { branch == "main" }}
-        //     steps {
-        //         echo '=========================================== 5. Deploying image to ECR ===================================================='
-        //         sh """
-        //             docker push 006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:latesttag
-        //         """
-        //         echo '=========================================== 5. END ======================================================================='
-        //     }
-        // }
+        stage('Deploy') {
+            when {expression { branch == "main" }}
+            steps {
+                echo '=========================================== 5. Deploying image to ECR ===================================================='
+                script{
+                    docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
+                        dockerImage.push()
+                    }
+                }
+                echo '=========================================== 5. END ======================================================================='
+            }
+        }
     }
 }
