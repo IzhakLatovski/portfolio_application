@@ -63,17 +63,30 @@ pipeline {
             }
         }
 
-        stage('Publish') {
-            when {expression { branch == "main" }}
+        stage('Publish-feature') {
+            when { branch "feature/*" }
             steps {
-                echo '=========================================== 5. Publish image to ECR ===================================================='
+                echo '=========================================== 5. Publish image to ECR (feature) ===================================================='
                 script{
                     docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
-                        dockerImage.push("${env.BUILD_NUMBER}")
+                        dockerImage.push("feature_${env.BUILD_NUMBER}")
+                    }
+                }
+                echo '=========================================== 5. END ==============================================================================='
+            }
+        }
+
+        stage('Publish-main') {
+            when {expression { branch == "main" }}
+            steps {
+                echo '=========================================== 5. Publish image to ECR (main) ===================================================='
+                script{
+                    docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
+                        dockerImage.push("release_1.${env.BUILD_NUMBER}")
                         dockerImage.push("latest")
                     }
                 }
-                echo '=========================================== 5. END ====================================================================='
+                echo '=========================================== 5. END ============================================================================'
             }
         }
 
