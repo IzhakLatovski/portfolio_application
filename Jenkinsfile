@@ -95,6 +95,10 @@ pipeline {
             steps {
                 sh"""
                     git remote add infra https://github.com/IzhakLatovski/portfolio_infrastructure.git
+
+                    git config --global user.email "you@example.com"
+                    git config --global user.name "Your Name"
+
                     git add .
                     git commit -m "IS IT WORKING"
                     git push -u origin master
