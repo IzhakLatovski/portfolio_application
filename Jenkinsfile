@@ -18,9 +18,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo '=========================================== 2. Building docker image ====================================================='
-                script {
-                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
-                }
+                // script {
+                //     dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
+                // }
+                docker build .
                 echo '=========================================== 2. END ======================================================================='
             }
         }
