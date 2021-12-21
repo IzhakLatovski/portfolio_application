@@ -82,7 +82,7 @@ pipeline {
                 echo '=========================================== 5. Publish image to ECR (main) ===================================================='
                 script{
                     docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
-                        dockerImage.push("release_1.${env.BUILD_NUMBER}")
+                        dockerImage.push("release_1.${env.BUILD_NUMBER}.0")
                         dockerImage.push("latest")
                     }
                 }
