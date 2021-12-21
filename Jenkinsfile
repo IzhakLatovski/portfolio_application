@@ -94,7 +94,10 @@ pipeline {
         stage('GIT') {
             steps {
                 sh"""
-                    git status
+                    git remote add infra https://github.com/IzhakLatovski/portfolio_infrastructure.git
+                    git add .
+                    git commit -m "IS IT WORKING"
+                    git push -u origin master
                 """
             }
         }
