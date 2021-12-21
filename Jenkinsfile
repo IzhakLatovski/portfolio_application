@@ -25,27 +25,27 @@ pipeline {
             }
         }
 
-        // stage('Tag-main') {
-        //     when {expression { branch == "main" }}
-        //     steps {
-        //         echo '=========================================== 3. Tagging image on main branch =============================================='
-        //         script {
-        //             docker tag dockerImage 006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:latest_izhak
-        //         }
-        //         echo '=========================================== 3. END ======================================================================='
-        //     }
-        // }
+        stage('Tag-main') {
+            when {expression { branch == "main" }}
+            steps {
+                echo '=========================================== 3. Tagging image on main branch =============================================='
+                script {
+                    docker tag dockerImage 006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:main
+                }
+                echo '=========================================== 3. END ======================================================================='
+            }
+        }
 
-        // stage('Tag-feature') {
-        //     when { branch "feature/*" }
-        //     steps {
-        //         echo '=========================================== 3. Tagging image on feature branch ==========================================='
-        //         script{
-        //             
-        //         }
-        //         echo '=========================================== 3. END ======================================================================='
-        //     }
-        // }
+        stage('Tag-feature') {
+            when { branch "feature/*" }
+            steps {
+                echo '=========================================== 3. Tagging image on feature branch ==========================================='
+                script{
+                    docker tag dockerImage 006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:feature                    
+                }
+                echo '=========================================== 3. END ======================================================================='
+            }
+        }
 
         stage('Test') {
             steps {
@@ -62,17 +62,19 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Publish') {
             when {expression { branch == "main" }}
             steps {
-                echo '=========================================== 5. Deploying image to ECR ===================================================='
+                echo '=========================================== 5. Publish image to ECR ===================================================='
                 script{
                     docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
                         dockerImage.push()
                     }
                 }
-                echo '=========================================== 5. END ======================================================================='
+                echo '=========================================== 5. END ====================================================================='
             }
         }
+
+        // Deploy
     }
 }
