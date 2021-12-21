@@ -19,7 +19,8 @@ pipeline {
             steps {
                 echo '=========================================== 2. Building docker image ====================================================='
                 script {
-                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
+                    // dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
+                    docker build .
                 }
                 echo '=========================================== 2. END ======================================================================='
             }
@@ -30,7 +31,7 @@ pipeline {
             steps {
                 echo '=========================================== 3. Tagging image on main branch =============================================='
                 script {
-                    docker tag dockerImage "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:main"
+                    // docker tag dockerImage "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:main"
                 }
                 echo '=========================================== 3. END ======================================================================='
             }
@@ -41,7 +42,7 @@ pipeline {
             steps {
                 echo '=========================================== 3. Tagging image on feature branch ==========================================='
                 script{
-                    docker tag dockerImage "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:feature "                   
+                    // docker tag dockerImage "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:feature "                   
                 }
                 echo '=========================================== 3. END ======================================================================='
             }
@@ -68,7 +69,8 @@ pipeline {
                 echo '=========================================== 5. Publish image to ECR ===================================================='
                 script{
                     docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
-                        dockerImage.push()
+                        // dockerImage.push()
+                        docker push
                     }
                 }
                 echo '=========================================== 5. END ====================================================================='
