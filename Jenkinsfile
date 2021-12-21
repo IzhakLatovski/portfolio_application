@@ -18,10 +18,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo '=========================================== 2. Building docker image ====================================================='
-                script {
-                    // dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
-                }
-                sh "docker build ."
+                // script {
+                //     dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
+                // }
+                sh"""
+                    docker build -t port_v2_lalala:"${BUILD_NUMBER}" .
+                """
                 echo '=========================================== 2. END ======================================================================='
             }
         }
@@ -70,7 +72,7 @@ pipeline {
                 script{
                     docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
                         // dockerImage.push()
-                        docker push
+                        docker push 006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:lalala
                     }
                 }
                 echo '=========================================== 5. END ====================================================================='
