@@ -91,5 +91,12 @@ pipeline {
         }
 
         // Deploy
+        stage('GIT') {
+            steps {
+                sh"""
+                    git status
+                """
+            }
+        }
     }
 }
