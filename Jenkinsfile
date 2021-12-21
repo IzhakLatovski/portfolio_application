@@ -94,10 +94,12 @@ pipeline {
         stage('GIT') {
             steps {
                 sh"""
-                    git remote add infra2 https://github.com/IzhakLatovski/portfolio_infrastructure.git
+                    git remote add infra3 https://github.com/IzhakLatovski/portfolio_infrastructure.git
 
                     git config --global user.email "you@example.com"
                     git config --global user.name "Your Name"
+
+                    echo "dfdf" > test.txt
 
                     git add .
                     git commit -m "IS IT WORKING"
