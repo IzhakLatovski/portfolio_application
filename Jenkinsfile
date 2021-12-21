@@ -18,10 +18,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo '=========================================== 2. Building docker image ====================================================='
-                // script {
-                //     dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
-                // }
-                sh "docker build -t cowsay_app:23 ."
+                script {
+                    // dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
+                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr"
+                }
                 echo '=========================================== 2. END ======================================================================='
             }
         }
@@ -63,18 +63,19 @@ pipeline {
             }
         }
 
-        // stage('Publish') {
-        //     when {expression { branch == "main" }}
-        //     steps {
-        //         echo '=========================================== 5. Publish image to ECR ===================================================='
-        //         script{
-        //             docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
-        //                 dockerImage.push()
-        //             }
-        //         }
-        //         echo '=========================================== 5. END ====================================================================='
-        //     }
-        // }
+        stage('Publish') {
+            when {expression { branch == "main" }}
+            steps {
+                echo '=========================================== 5. Publish image to ECR ===================================================='
+                script{
+                    docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
+                        dockerImage.push("${env.BUILD_NUMBER}")
+                        dockerImage.push("latest")
+                    }
+                }
+                echo '=========================================== 5. END ====================================================================='
+            }
+        }
 
         // Deploy
     }
