@@ -21,7 +21,7 @@ pipeline {
                 // script {
                 //     dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
                 // }
-                sh "docker build ."
+                sh "docker build -t cowsay_app:23 ."
                 echo '=========================================== 2. END ======================================================================='
             }
         }
