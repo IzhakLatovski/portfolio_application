@@ -18,37 +18,34 @@ pipeline {
         stage('Build') {
             steps {
                 echo '=========================================== 2. Building docker image ====================================================='
-                // script {
-                //     dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
-                // }
-                sh"""
-                    docker build -t port_v2_lalala:"${BUILD_NUMBER}" .
-                """
+                script {
+                    dockerImage = docker.build "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr" + ":portfolio_v2_$BUILD_NUMBER"
+                }
                 echo '=========================================== 2. END ======================================================================='
             }
         }
 
-        stage('Tag-main') {
-            when {expression { branch == "main" }}
-            steps {
-                echo '=========================================== 3. Tagging image on main branch =============================================='
-                script {
-                    // docker tag dockerImage "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:main"
-                }
-                echo '=========================================== 3. END ======================================================================='
-            }
-        }
+        // stage('Tag-main') {
+        //     when {expression { branch == "main" }}
+        //     steps {
+        //         echo '=========================================== 3. Tagging image on main branch =============================================='
+        //         script {
+        //             docker tag dockerImage 006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:latest_izhak
+        //         }
+        //         echo '=========================================== 3. END ======================================================================='
+        //     }
+        // }
 
-        stage('Tag-feature') {
-            when { branch "feature/*" }
-            steps {
-                echo '=========================================== 3. Tagging image on feature branch ==========================================='
-                script{
-                    // docker tag dockerImage "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr:feature "                   
-                }
-                echo '=========================================== 3. END ======================================================================='
-            }
-        }
+        // stage('Tag-feature') {
+        //     when { branch "feature/*" }
+        //     steps {
+        //         echo '=========================================== 3. Tagging image on feature branch ==========================================='
+        //         script{
+        //             
+        //         }
+        //         echo '=========================================== 3. END ======================================================================='
+        //     }
+        // }
 
         stage('Test') {
             steps {
@@ -71,8 +68,7 @@ pipeline {
                 echo '=========================================== 5. Publish image to ECR ===================================================='
                 script{
                     docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
-                        // dockerImage.push()
-                        docker push
+                        dockerImage.push()
                     }
                 }
                 echo '=========================================== 5. END ====================================================================='
