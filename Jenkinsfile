@@ -91,21 +91,21 @@ pipeline {
         }
 
         // Deploy
-        stage('GIT') {
-            steps {
-                sh"""
-                    git remote add infra3 https://github.com/IzhakLatovski/portfolio_infrastructure.git
+        // stage('GIT') {
+        //     steps {
+        //         sh"""
+        //             git remote add infra3 https://github.com/IzhakLatovski/portfolio_infrastructure.git
 
-                    git config --global user.email "you@example.com"
-                    git config --global user.name "Your Name"
+        //             git config --global user.email "you@example.com"
+        //             git config --global user.name "Your Name"
 
-                    echo "dfdf" > test.txt
+        //             echo "dfdf" > test.txt
 
-                    git add .
-                    git commit -m "IS IT WORKING"
-                    git push -u origin master
-                """
-            }
-        }
+        //             git add .
+        //             git commit -m "IS IT WORKING"
+        //             git push -u origin master
+        //         """
+        //     }
+        // }
     }
 }
