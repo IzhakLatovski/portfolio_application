@@ -63,18 +63,18 @@ pipeline {
             }
         }
 
-        stage('Publish') {
-            when {expression { branch == "main" }}
-            steps {
-                echo '=========================================== 5. Publish image to ECR ===================================================='
-                script{
-                    docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
-                        dockerImage.push()
-                    }
-                }
-                echo '=========================================== 5. END ====================================================================='
-            }
-        }
+        // stage('Publish') {
+        //     when {expression { branch == "main" }}
+        //     steps {
+        //         echo '=========================================== 5. Publish image to ECR ===================================================='
+        //         script{
+        //             docker.withRegistry("https://" + "006262944085.dkr.ecr.eu-west-2.amazonaws.com/v2-ecr", "ecr:eu-west-2:" + "portfoliocredentials") {
+        //                 dockerImage.push()
+        //             }
+        //         }
+        //         echo '=========================================== 5. END ====================================================================='
+        //     }
+        // }
 
         // Deploy
     }
